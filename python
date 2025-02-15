@@ -1,0 +1,22 @@
+import pandas
+import matplotlib.pyplot as plt
+import io
+
+data = pandas.read_csv("PastryCountSheet.csv")
+
+print(data.head())
+print(data["Amount"])
+print(data.info())
+
+plt.figure(figsize=(12, 6))
+pcdata = data.groupby('Pastry')['Amount'].sum().sort_values(ascending=False)
+pcdata.plot(kind='bar')
+plt.title('Pastries and the amount held in the store')
+plt.xlabel('Pastry')
+plt.ylabel('Amount')
+plt.xticks(rotation=45, ha='right')
+plt.tight_layout()
+plt.savefig('PastryByCount.png')
+plt.close()
+
+
